@@ -8,9 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = ModelView()
     var body: some View {
-        Text("Hello, world!")
+        Form {
+            VStack(spacing: 20) {
+                Text("\(viewModel.convertedText)")
+                    .font(.headline)
+                TextField("Enter a value", text: $viewModel.text)
+                    .textFieldStyle(.roundedBorder)
+                    .keyboardType(.decimalPad)
+                    .submitLabel(.done)
+                Button("Convert", action: viewModel.convertMoney)
+                    .buttonStyle(.borderedProminent)
+            }
             .padding()
+        }
     }
 }
 
